@@ -1,0 +1,126 @@
+footer{
+    background: #333;
+    margin-top:30px;
+    font-size:16px;
+}
+footer>.container{
+    width:1180px;
+}
+.container>.column>*{
+    color:#fff;
+    font-size:16px;
+}
+.flogo{
+    padding:42px 0;
+    height: 17px;
+}
+footer>.container>.column{
+    width:25%;
+}
+.flogo:hover{
+    opacity: 0.7;
+}
+.ftitle{
+    padding-top: 14px;
+    padding-bottom: 20px;
+}
+.container>.column>.delim{
+    border-bottom: 1px #fff dotted;
+    margin-bottom: 10px;
+    width:80%;
+}
+.delim-extended {
+    width:100% !important;
+}
+.fmenu
+{
+    marker:none;
+    color:#fff;
+    padding:0; 
+}
+.fmenu>li{
+    list-style: none;
+    margin-bottom:12px;
+    cursor: pointer;
+}
+.fmenu>li:hover{
+    color:#ffa218;
+}
+.number-box{
+    display:inline-block;
+}
+.adress{
+    color:#fff;
+    font-size: 14px;
+}
+.adress:hover
+{
+    color:#ffa218;
+}
+.number:hover{
+    color:#ffa218;
+    cursor: pointer;
+}
+.ffollow{
+    margin-top:24px;
+}
+#mailbox{
+    margin-top:8px;
+    height:46px;
+    width:100%;
+    border-radius: 8px;
+    background:#f2f2f2;
+    line-height: 20px;
+    box-shadow:0 1px 1px 0 rgba(0,0,0,.2);
+    white-space: nowrap;
+    display: flex;
+}
+#mailbox>span{
+    color:#aaa;
+    line-height: 44px;
+    padding-right: 5px;
+    font-size: 32px;
+}
+.follow-rules{
+    margin-top:10px;
+    color:#8c8c8c;
+    font-size: 12px;
+}
+.follow-rules>p>a{
+    text-decoration: none; 
+}
+.follow-rules>p>a:hover{
+    color:#fc5808 !important;
+}
+.follow-rules>p>a:visited{
+    color:LinkText;
+}
+#fchannels{
+    margin:22px 0;
+}
+#fchannels>a{
+    margin-right:8px;
+}
+#fchannels>a>svg:hover>rect{
+    fill:#585858 ;
+}
+#fgoogleplay{
+    margin-bottom: 31px;
+}
+#fgoogleplay>a:hover>svg>:first-child{
+    fill:#545454;
+}
+#fbotdelim{
+    border:1px #555 dotted;
+}
+#copyright{
+    color:#999;
+    font-size: 14px;
+    width:1180px;
+}
+#breaker{
+    display:block;
+}
+#copyright{
+    padding:16px 0;
+}
