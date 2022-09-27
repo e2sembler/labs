@@ -38,7 +38,7 @@ foreach($res as $row){
     echo "<img src='../images/items/$row[0]'/>";
     echo "<p>$row[1]</p>";
     echo "<p>$row[2]</p>";
-    echo "<p>$row[3]</p>";
+    echo "<p class='desc-box'>$row[3]</p>";
     echo "<p>$row[4]p</p>";
     echo "</div>";
  }

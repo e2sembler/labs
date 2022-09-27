@@ -24,6 +24,8 @@
     margin-left:10px;
     margin-right: 10px;
     max-height: 200px;
+}
+.desc-box{ 
     overflow:scroll;
 }
 
