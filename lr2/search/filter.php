@@ -35,7 +35,7 @@ $exec->execute($array);
 $res = $exec->fetchAll();
 foreach($res as $row){ 
     echo "<div>";
-    echo "<img src='../images/items/$row[0]'/>";
+    echo "<div id=img><img src='../images/items/$row[0]'/></div>";
     echo "<p>$row[1]</p>";
     echo "<p>$row[2]</p>";
     echo "<p class='desc-box'>$row[3]</p>";

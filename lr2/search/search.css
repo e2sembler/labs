@@ -15,9 +15,13 @@
     margin-left: auto;
     margin-right: auto;
 }
+#item-list{
+    background:#fff;
+}
 #item-list>div{
     display: flex;  
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+    border-bottom: 10px #f6f6f6 solid;
 }
 #item-list>div>p{
     width: 180px;
@@ -29,10 +33,21 @@
     overflow:scroll;
 }
 
-#item-list>div>img{
+#img>img{
     max-width:200px;
     max-height:200px;
+    position: relative;
+    margin-left:auto;
+    margin-right: auto;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
+#img {
+    width:200px;
+    height:200px; }
 #price-row{
     display: flex;
 } 
@@ -59,6 +74,8 @@ form>input, form>select{
     cursor:pointer;
     height:25px;
     width:150px;
+    color:#fff;
+    font-weight: 600;
 }
 #send:hover, #reset:hover{
     background: linear-gradient(180deg,#ffbc0b,#ff7400) !important;
@@ -68,6 +85,19 @@ form>:last-child{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#search-box{
-    margin-right: 20px; 
+.container{
+    min-height: 100px;
 }
+#search-box{
+    margin-top:10px;
+    align-self: flex-start;
+    margin-right: 20px;  
+    position: sticky;
+    top:0;  
+} 
+#search-box{
+    background:#fff;
+    padding:10px;
+    border-radius: 8px;
+}
+ 
