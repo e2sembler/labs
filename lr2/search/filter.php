@@ -1,38 +1,44 @@
 
-<?php       
+<?php  
+function GetData($arr){
 $db = new PDO("sqlite:../laba2.db");  
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$array = array('fname'=>$_GET['fname'],'fdesc'=>$_GET['fdesc']);
-$query = "SELECT img_path,name,
-(select name from brands as brand where id_brand=id)
-,description,price 
+$array = array('fname'=>$arr['fname'],'fdesc'=>$arr['fdesc']);
+$query = "SELECT items.img_path,items.name , brands.name
+,items.description,items.price 
 FROM items 
-WHERE name like '%'||:fname||'%'
-AND description like '%'||:fdesc||'%' 
+INNER JOIN Brands on id_brand=Brands.id 
+WHERE items.name like '%'||:fname||'%'
+AND items.description like '%'||:fdesc||'%' 
 ";
 
-if(!empty($_GET['fmax']) & is_numeric($_GET['fmax'])){
-    $query.="AND price <= :fmax ";
-    $array+=[':fmax'=>$_GET['fmax']];}
+if(!empty($arr['fmax']) & is_numeric($arr['fmax'])){
+    $query.="AND items.price <= :fmax ";
+    $array+=[':fmax'=>$arr['fmax']];}
     
 
-if(!empty($_GET['fmin']) & is_numeric($_GET['fmin']))
+if(!empty($arr['fmin']) & is_numeric($arr['fmin']))
 {
-$query.="AND price >= :fmin ";
-$array+=[':fmin'=>$_GET['fmin']]; 
+$query.="AND items.price >= :fmin ";
+$array+=[':fmin'=>$arr['fmin']]; 
 }
 
-if(!empty($_GET['fbrand'])){
-$query.="AND id_brand=(SELECT id from brands where name=:fbrand)";
-$array+=[':fbrand'=>$_GET['fbrand']];}
+if(!empty($arr['fbrand'])){
+$query.="AND items.id_brand=(SELECT id from brands where name=:fbrand)";
+$array+=[':fbrand'=>$arr['fbrand']];}
 
+$query.=" ";      
 
 $exec = $db->prepare($query);
 $exec->execute($array);
-
-
 $res = $exec->fetchAll();
+$db=null;
+return $res;
+}
+
+
+$res = GetData($_GET);
 foreach($res as $row){ 
     echo "<div>";
     echo "<div id=img><img src='../images/items/$row[0]'/></div>";
@@ -42,5 +48,4 @@ foreach($res as $row){
     echo "<p>$row[4]p</p>";
     echo "</div>";
  }
- $db=null;
  ?>
