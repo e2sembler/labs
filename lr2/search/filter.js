@@ -5,10 +5,17 @@ function GetData(){
     let fdesc = document.getElementById("desc").value;
     let fbrand = document.getElementById("brands").value;
     const xhttp= new XMLHttpRequest();
-    xhttp.onload = function(){
-        document.getElementById("item-list").innerHTML=this.responseText;
-        scroll(0,0);
-    }
+
+    xhttp.onerror = ()=> alert("Нет связи с сервером");
     xhttp.open("GET","filter.php?fname="+fname+"&fmin="+fmin+"&fmax="+fmax+"&fdesc="+fdesc+"&fbrand="+fbrand);
-    xhttp.send();
+    xhttp.send(); 
+    xhttp.onreadystatechange =()=> {
+        if(xhttp.readyState === XMLHttpRequest.DONE){
+        if (xhttp.status === 200){ 
+            document.getElementById("item-list").innerHTML=xhttp.responseText;
+            scroll(0,0);
+        }
+        if(xhttp.status==500) alert("Проблема на стороне сервера");
+    }
+    } 
 }
