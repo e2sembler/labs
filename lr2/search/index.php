@@ -11,8 +11,8 @@
 </head>
 <html>  
   <body>
-  <?php include ($root.'header.php');?> 
-  <?php include ('body.php');?>
-  <?php include ($root.'footer.php');?>
+  <?php require_once ($root.'header.php');?> 
+  <?php require_once ('body.php');?>
+  <?php require_once ($root.'footer.php');?>
   </body>
 </html>

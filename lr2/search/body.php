@@ -11,11 +11,11 @@
 <p>Бренд:</p>
 <select id="brands"><option></option>
 <?php
- $db = $db = new PDO("sqlite:../laba2.db");  
- $res = $db->query("SELECT name from brands");
+ require_once('funcs.php');
+ $res = GetBrands();
  foreach($res as $row)
  echo "<option>$row[0]</option>";
- $res=null;?>
+?>
 </select>
 <p>Содержит в описание:</p>
 <input type="text" id="desc">
