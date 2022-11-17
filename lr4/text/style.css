@@ -1,0 +1,33 @@
+#inputarea{
+    position: relative;
+    width:100%;
+    resize: none;
+    min-height: 300px;
+}
+#mom{
+    margin: 20px;
+}
+ 
+my-yellow{
+    background-color: yellow;
+    display: inline !important;
+}
+my-yellow>a{
+    display:  inline !important;
+    background-color: yellow;
+}
+
+
+#countres{
+    display: block !important;
+}
+#countres>a{
+display:  block;}
+#countres>a:hover{
+    color:black;
+}
+#resultarea>*{
+    display: inline !important;
+}
+
+ 

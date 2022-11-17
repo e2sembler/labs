@@ -1,0 +1,54 @@
+#logform{
+    padding-top:10px;
+    padding-bottom: 10px;
+    margin: 10px auto auto auto;
+    width:450px; 
+    border-top: 3px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+#logform>table>tbody>tr>td>input{
+    width:300px;
+}
+td{
+    padding:0 10px;
+}
+td{
+    padding-bottom: 4px;
+}
+#passtd>div>p{ 
+    display: block;
+}
+.visible {
+    display: block !important;
+} 
+td>div>p {
+    color:red;
+}
+#reglog {
+    display: flex;
+    margin-top:20px;
+    margin-bottom:10px;
+    width:160px;
+    margin-left:auto;
+    margin-right: auto; 
+
+}
+#reglog>p{
+    margin-left:10px;
+    margin-right: 10px;
+}
+#login{ 
+    margin-left:10px;
+    margin-top:10px;
+    background:linear-gradient(0deg,#fc8507,#ffa218);
+    border-color: #fc8507 transparent #ffa218;
+    color:#fff;
+    cursor:pointer;
+    border-radius: 4px; 
+    font-size: 16px !important;
+}
+#randomname{
+    width:450px;
+    margin-left:auto;
+    margin-right: auto;
+}
