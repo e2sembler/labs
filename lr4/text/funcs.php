@@ -15,7 +15,7 @@ function DoTheStuffIamTheStuff($text){
 /*  минуc между пробелами заменять на &mdash; и привязывать его к предыдущему слову неразрывным
 /*  пробелом. */
 function Job5($text){
-    $text = preg_replace('/(\s-\s)/u',"&nbsp;&ndash; ",$text);
+    $text = preg_replace('/(\s-\s)/u'," &ndash; ",$text);
     $text = preg_replace('/(\s--\s)/u','&nbsp;&mdash; ', $text); 
     return $text;
 };
@@ -26,8 +26,8 @@ function Job5($text){
 /*  этих знаков препинания (если его нет).*/
 
 function Job9($text){
-    $text = preg_replace('/(\s+?-\s+?((?=либо)|(?=нибудь)|(?=то)))/ui','-', $text);  
-    $text = preg_replace('/(\s((?=\;)|(?=\.)|(?=\,)))/u','', $text);
+    $text = preg_replace('/(\s*?-\s*?((?=либо)|(?=нибудь)|(?=то)))/ui','-', $text);  
+    $text = preg_replace('/(\s+((?=\;)|(?=\.)|(?=\,)))/u','', $text);
     $text = preg_replace('/(((?<=\;)|(?<=\.)|(?<=\,))(?!\s))/u',' ', $text); 
     return $text;
 }
@@ -66,15 +66,13 @@ function Job17($text,&$wordcounterarr){
     $cleanedtext = preg_replace("/(\&nbsp\;)|(\&ndash\;)/ui"," ",$cleanedtext);
     $words = preg_split('/([^\w+]+|\bно\b|\bв\b|\bесли\b|\bи\b|\bпо\b|\bа\b|\bже\b|\d+|\b\w{1,3}\b)/ui',mb_strtolower($cleanedtext));
     foreach ($words as $word){
-        if(empty($word))continue;
+        if(empty($word)) continue;
         if(!isset($wordcounterarr[$word])) {
             $wordcounterarr[$word]=1; continue;}
         if($wordcounterarr[$word]==1){
-            $text = preg_replace('/\b('.$word.')\b/ui','<my-yellow>'.$word.'</my-yellow>',$text);  
-            $text = preg_replace('/<my-yellow>'.$word.'<\/my-yellow>/ui',$word,$text,1);  
+            $text = preg_replace('/((?<=('.$word.'\W)|('.$word.'\W{2}))(?<!\>)\b'.$word.'\b)/ui', '<my-yellow>'.$word.'</my-yellow>' ,$text);
         }
         $wordcounterarr[$word]++;
-    }
-    error_log(count($wordcounterarr));
+    } 
     return $text; 
 }
