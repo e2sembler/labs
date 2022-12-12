@@ -34,7 +34,8 @@ if(!empty($_GET['table_items'])){
             }
     }
     $brand_id = Brands::GetId($_POST['brand']);
-    if(Items::AddElement($fullfilename,$_POST['name'],$brand_id,$_POST['desc'],$_POST['price']))
+    if(Items::AddElement($fullfilename,htmlspecialchars($_POST['name']),$brand_id,htmlspecialchars($_POST['desc']),
+    htmlspecialchars($_POST['price'])))
         move_uploaded_file($_FILES['img']['tmp_name'],'../images/items/'.$fullfilename); 
     die();    
  }
