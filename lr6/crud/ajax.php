@@ -3,7 +3,7 @@
 require_once ('./classes/items.php'); 
 require_once ('./classes/brands.php');
 
-if(!empty($_GET['table_items'])){
+if($_GET['table_items']){
     $res = Items::GetData();
     foreach($res as $row){
         echo "<div>";
@@ -17,7 +17,7 @@ if(!empty($_GET['table_items'])){
     }
     die();
 } 
- if(!empty($_POST['name'])&&!empty($_POST['brand'])&&!empty($_POST['desc'])&&!empty($_POST['price'])&&!empty($_FILES['img'])){
+ if($_POST['name']&&$_POST['brand']&&$_POST['desc']&&$_POST['price']&&$_FILES['img']){
     if(Items::IsDuplicate($_POST['name'])){
         echo "Такое имя уже существует";
         die();

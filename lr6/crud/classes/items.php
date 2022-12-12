@@ -10,11 +10,10 @@ class Items{
             INNER JOIN Brands on Items.id_brand=Brands.id 
             ORDER BY Items.Id"
         );
-        $query->execute();
-        $res = $query->fetchAll();
-        return $res;
+        if($query->execute())
+        return $query->fetchAll(); 
     }
-    public static function AddElement(&$filename, &$name, &$brand_id, &$desc, &$price):bool
+    public static function AddElement(&$filename, $name, &$brand_id, $desc, $price):bool
     {
        $query = DB::prepare("INSERT INTO Items Values(default(Items.id),:filename,:name,:brand_id,:desc,:price);");
        $query->bindValue(':filename',$filename);
