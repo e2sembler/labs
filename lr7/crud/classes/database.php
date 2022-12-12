@@ -12,7 +12,8 @@ class DB{
     {
         $this->connection = new \PDO(self::$conn,self::$user,self::$pass,[
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_EMULATE_PREPARES => false
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::FETCH_ASSOC => true
         ]);
     }
 

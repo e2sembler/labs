@@ -4,7 +4,7 @@ require_once ('./classes/items.php');
 require_once ('./classes/brands.php');
 require_once ('./funcs.php');
 
-if(!empty($_GET['table_items'])){
+if($_GET['table_items']){
     $res = Items::GetData();
     $brands = Brands::GetData(); 
     foreach($res as $row){
@@ -27,7 +27,7 @@ if(!empty($_GET['table_items'])){
     die();
 } 
 
-if(!empty($_GET['get_brands'])){ 
+if($_GET['get_brands']){ 
     echo '<select id="brands">';
         $res = Brands::GetData();
         foreach($res as $row)
@@ -35,8 +35,8 @@ if(!empty($_GET['get_brands'])){
     echo '</select>'; 
     }
 
-if(!empty($_POST['additem'])){
-    if(!empty($_POST['name'])&&!empty($_POST['brand'])&&!empty($_POST['desc'])&&!empty($_POST['price'])&&!empty($_FILES['img'])){
+if($_POST['additem']){
+    if($_POST['name']&&$_POST['brand']&&$_POST['desc']&&$_POST['price']&&$_FILES['img']){
         if(Items::IsDuplicate($_POST['name'])){
             echo "Такое имя уже существует";
             die();
@@ -59,11 +59,11 @@ if(!empty($_POST['delete'])){
     }
 }
 
-if(!empty($_POST['updatetable'])){
-    if(!empty($_POST['id'])&&!empty($_POST['name']&&!empty($_POST['brand'])&&!empty($_POST['desc'])&&!empty($_POST['price'])))
+if($_POST['updatetable']){
+    if($_POST['id']&&$_POST['name']&&$_POST['brand']&&$_POST['desc']&&$_POST['price'])
         {
             $brandid = Brands::GetId($_POST['brand']);  
-            if(!empty($_FILES['img'])){
+            if($_FILES['img']){
                 $fullfilename = GenerateImgName($_FILES['img']);
                 $oldimg = Items::GetImageName($_POST['id']);
                 error_log("Image is not empty");

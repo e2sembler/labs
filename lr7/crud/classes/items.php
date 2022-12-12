@@ -9,9 +9,8 @@ class Items{
             INNER JOIN Brands on Items.id_brand=Brands.id 
             ORDER BY Items.Id"
         );
-        $query->execute();
-        $res = $query->fetchAll();
-        return $res;
+        if($query->execute())
+        return $query->fetchAll(); 
     }
     public static function AddElement(&$filename, $name, &$brand_id, $desc, $price):bool{
        $query = DB::prepare("INSERT INTO Items Values(default(Items.id),:filename,:name,:brand_id,:desc,:price);");
@@ -35,7 +34,7 @@ class Items{
         return $query->execute();
     }
 
-    public static function UpdateItem(&$id,$name,$brand_id,$desc,$price,$img_path=null){
+    public static function UpdateItem(&$id,$name,$brand_id,$desc,$price,$img_path=null):bool{
         $str = "UPDATE Items 
                     SET Items.name=:name, Items.id_brand=:brandid, Items.description=:desc, Items.price=:price ";
         if($img_path!=null){
@@ -53,7 +52,7 @@ class Items{
         return $query->execute();
     }
 
-    public static function GetImageName(&$id){
+    public static function GetImageName(&$id):string{
         $query = DB::prepare("SELECT Items.img_path from Items WHERE id=:id");
         $query->bindValue(":id",$id);
         if($query->execute())
