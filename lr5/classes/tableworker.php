@@ -39,13 +39,19 @@ class TableWorker{
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function HasDuplicate(string $tablename, string $crc32):bool{
-        
-        $query = DB::prepare("SELECT COUNT(*) FROM ".$tablename.
-        " WHERE crc32=:crc32;");
-        $query->bindValue(":crc32",$crc32);
+    public static function TableExists(string $tablename):bool{
+        $query = DB::prepare("SHOW TABLES LIKE '".$tablename."'"); 
         $query->execute();
-        return $query->fetchColumn()>0;
+        return $query->fetchColumn();
+    }
+
+    public static function HasDuplicateData(string $tablename, int $id, string $hash):bool{
+        $query = DB::prepare("SELECT COUNT(*) FROM ".$tablename.
+        " WHERE id=:id AND crc32=:crc32;");
+        $query->bindValue(":id",$id);
+        $query->bindValue(":crc32",$hash);
+        $query->execute();
+        return $query->fetchColumn();
     }
 
     public static function CreateTable(string $tablename,array $columns):bool{
@@ -60,16 +66,29 @@ class TableWorker{
         return ($query->execute());
     }
 
-    public static function AddItem(string $tablename,array $row):bool{
-        $str = "INSERT INTO ".$tablename." VALUES( default, ";
+    public static function HasSameId(string $tablename, int $id):bool{
+        $query = DB::prepare("SELECT COUNT(*) FROM ".$tablename." WHERE id=:id");
+        $query->bindValue(":id",$id);
+        $query->execute();
+        return $query->fetchColumn()>0;
+    }
+
+    public static function UpdateItem(string $tablename, int $id, array $row):bool{
+        $str = "UPDATE ".$tablename." SET "; 
+        $columns = self::GetColumnNames($tablename); 
         array_shift($row);
-        $tmp="";
-        foreach($row as $column) 
-            $tmp.=$column; 
-        array_push($row,crc32($tmp));
-        error_log($column);
-        if(TableWorker::HasDuplicate($tablename,crc32($tmp)))
-            return false;
+        array_shift($columns);
+        for($i = 0; $i<count($columns)-1;$i++)
+            $str.=$columns[$i]."=?,";
+        $str.=$columns[count($columns)-1]."=? WHERE id=?";
+        array_push($row,$id);
+        error_log($str);
+        $query=DB::prepare($str);
+        return $query->execute($row);
+    }
+
+    public static function AddItem(string $tablename,array $row):bool{
+        $str = "INSERT INTO ".$tablename." VALUES("; 
         for($i=0;$i<count($row)-1;$i++) 
             $str.="?, ";
         $str.="?);";
